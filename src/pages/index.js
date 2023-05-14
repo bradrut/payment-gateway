@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { loadStripe } from '@stripe/stripe-js';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
@@ -22,21 +23,45 @@ export default function PreviewPage() {
 
   return (
     <form action="/api/stripe/checkout/sessions" method="POST">
-      <section>
+      <section className='checkout-card'>
+        <section className='product-wrapper flex flex-row'>
+          <div className='product-image-wrapper'>
+            <Image className='product-image drop-shadow'
+              src='/HoneyLocust.jpg'
+              fill='true'
+              style={{ objectFit: 'cover', overflow: 'hidden' }}
+              alt='Picture of Honey Locust tree leaves'/>
+          </div>
+          <div style={{ paddingTop: '11px', paddingLeft: '5px' }}>
+            <p className='text-black font-sans font-semibold text-base'>Plant a tree (Honey Locust)</p>
+            <p className='font-sans font-semibold text-sm text-slate-800'>$4.99</p>
+          </div>
+        </section>
         <button type="submit" role="link">
           Checkout
         </button>
       </section>
       <style jsx>
         {`
-          section {
-            background: #ffffff;
+          .checkout-card {
+            background: #EBEBEB;
             display: flex;
             flex-direction: column;
             width: 400px;
             height: 112px;
             border-radius: 6px;
             justify-content: space-between;
+          }
+          .product-wrapper {
+            height: 76px;
+          }
+          .product-image-wrapper {
+            position: relative;
+            margin: 9px;
+            width: 58px;
+            height: 58px;
+            overflow: hidden;
+            border-radius: 3px;
           }
           button {
             height: 36px;
@@ -48,6 +73,7 @@ export default function PreviewPage() {
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+            // margin-top: 76px;
           }
           button:hover {
             opacity: 0.8;
